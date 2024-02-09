@@ -2,8 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Particles from "./components/Particles";
 import Home from "./pages/Home";
 import { useState } from "react";
-import { ethers } from "ethers";
-import Upload from './artifacts/contracts/Upload.sol/Upload.json';
 import React from 'react'
 
 // Create context for account and contract
