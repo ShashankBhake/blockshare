@@ -47,24 +47,24 @@ const Display = ({ contract, account }) => {
   // })
   return (
     <>
-      <div style={{
-        // zIndex: "100",
-      }} className="image-list">
-        <>
-        {data}
-        </>
-        </div>
-      <input
-        type="text"
-        placeholder="Enter Address"
-        className="address"
-      ></input>
-      <p>
-          Account : {account ? account : "Not connected"}
-        </p>
-      <button className="center button" onClick={getdata}>
-        Get Data
-      </button>
+      <div className="container">
+  <div className="list">
+    {/* Render your image data here */}
+    {data}
+  </div>
+  <input
+    type="text"
+    placeholder="Enter Address"
+    className="address"
+  />
+  <p className="account-text">
+    Account: {account ? account : "Not connected"}
+  </p>
+  <button className="center button" onClick={getdata}>
+    Get Data
+  </button>
+</div>
+
     </>
   );
 };
