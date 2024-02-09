@@ -15,7 +15,6 @@ const Home = () => {
     useEffect(() => {
         if (walletAddress) {
             navigate('/home');
-            
         }
     }, [walletAddress])
 

@@ -7,11 +7,14 @@ import axios from 'axios';
 import '../App.css'
 import { useNavigate } from 'react-router-dom';
 import Display from './Display';
+import Modal from "./Modal";
 
 const App = () => {
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState('');
     const navigate = useNavigate();
+    const [modalOpen, setModalOpen] = useState(false);
+
 
     const { account, setAccount, contract, setContract } = useContext(AccountContext);
 
@@ -68,23 +71,34 @@ const App = () => {
     };
     console.log(`account: ${account}`)
     return (
-        <div className="App">
-            {/* <Particles id="tsparticles" init={particlesInit} options={filesAmongus} className="particles" /> */}
-            <div className="content">
-                <h1 className="title">BlockShare</h1>
-                <div className="upload-container">
-                    <label htmlFor="file-upload" className="upload-button"  >
-                        Choose Image
-                    </label>
-                    <input disabled={!account} type="file" id="file-upload" name="data" className="file-input" onChange={selectFile} />
-                    <span className="file-name">{!file ? 'No file selected' : fileName}</span>
-                    <button type="submit" className="submit-button" disabled={!file || !account} onClick={handleSubmit}>
-                        Upload File
-                    </button>
+        <>
+            {!modalOpen && (
+                <button className="share" onClick={() => setModalOpen(true)}>
+                    Share
+                </button>
+            )}
+
+            {modalOpen && (
+                <Modal setModalOpen={setModalOpen} contract={contract}></Modal>
+            )}
+            <div className="App">
+                {/* <Particles id="tsparticles" init={particlesInit} options={filesAmongus} className="particles" /> */}
+                <div className="content">
+                    <h1 className="title">BlockShare</h1>
+                    <div className="upload-container">
+                        <label htmlFor="file-upload" className="upload-button"  >
+                            Choose Image
+                        </label>
+                        <input disabled={!account} type="file" id="file-upload" name="data" className="file-input" onChange={selectFile} />
+                        <span className="file-name">{!file ? 'No file selected' : fileName}</span>
+                        <button type="submit" className="submit-button" disabled={!file || !account} onClick={handleSubmit}>
+                            Upload File
+                        </button>
+                    </div>
                 </div>
+                <Display contract={contract} account={account}></Display>
             </div>
-            <Display contract={contract} account={account}></Display>
-        </div>
+        </>
     );
 };
 
