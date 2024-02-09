@@ -4,17 +4,22 @@
     justify-content: center;
     gap: 20px;
     margin: 10px;
+    padding: 30px;
   }
   
   .list img {
     width: 250px;
     height: 350px;
     border-radius: 20px;
+    object-fit: cover;
+    transition: 1.2s;
+    padding: 10px;
   }
 
   .list img:hover {
     transform: scale(120%);
-    transition: 0.5s;
+    transition: 0.7s;
+    margin: 40px;
     
   }
   .center {
@@ -60,7 +65,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    background-color: #8f8fe1;
+    /* background-color: #8f8fe1; */
   }
   
   .address {

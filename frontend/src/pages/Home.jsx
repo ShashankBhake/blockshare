@@ -23,10 +23,10 @@ const Home = () => {
             {/* <ParticleBg /> */}
             <div style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
                 <div>
-                    <h1 style={{ color: 'white', fontSize: '5rem' }} >BlockShare</h1>
+                    <h1 className='hometitle' style={{ color: 'white', fontSize: '5rem', fontFamily: 'Myriad Pro Regular' }} >BlockShare</h1>
                     <ConnectWallet setDetails={setAccount} />
                 </div>
-                <p>Wallet Address: {walletAddress}</p>
+                {/* <p>Wallet Address: {walletAddress}</p> */}
             </div>
         </div>
     );

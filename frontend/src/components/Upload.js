@@ -84,16 +84,20 @@ const App = () => {
             <div className="App">
                 {/* <Particles id="tsparticles" init={particlesInit} options={filesAmongus} className="particles" /> */}
                 <div className="content">
-                    <h1 className="title">BlockShare</h1>
+                    <h1 className="title" style={{ padding : '40px', fontSize : '4rem', marginBottom :'20px'}}>BlockShare</h1>
                     <div className="upload-container">
+                        <span className="file-name">{!file ? 'No file selected' : fileName}</span>
+                        <div style={{ display : 'flex' , gap : '15px'}}>
                         <label htmlFor="file-upload" className="upload-button"  >
                             Choose Image
                         </label>
                         <input disabled={!account} type="file" id="file-upload" name="data" className="file-input" onChange={selectFile} />
-                        <span className="file-name">{!file ? 'No file selected' : fileName}</span>
-                        <button type="submit" className="submit-button" disabled={!file || !account} onClick={handleSubmit}>
+                        <button style={{
+                            backgroundColor : file ? 'green' : 'grey'
+                        }} type="submit" className="submit-button" disabled={!file || !account} onClick={handleSubmit}>
                             Upload File
                         </button>
+                        </div>
                     </div>
                 </div>
                 <Display contract={contract} account={account}></Display>

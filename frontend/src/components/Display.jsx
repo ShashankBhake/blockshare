@@ -57,8 +57,8 @@ const Display = ({ contract, account }) => {
     placeholder="Enter Address"
     className="address"
   />
-  <p className="account-text">
-    Account: {account ? account : "Not connected"}
+  <p className="account-text" style={{ color : 'white'}}>
+    Your Address: {account ? account : "Not connected"}
   </p>
   <button className="center button" onClick={getdata}>
     Get Data

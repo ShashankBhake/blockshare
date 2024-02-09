@@ -4,6 +4,9 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.share{
+    color: white;
+}
 /* Container */
 .App {
     position: relative;
@@ -12,7 +15,7 @@ body {
 
 /* Particles */
 .particles {
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     left: 0;
     width: 100%;
@@ -29,10 +32,31 @@ body {
     padding: 50px;
 }
 
+
+@keyframes slideInTitle {
+    from {
+        transform: translateZ(400%);
+        scale: 1000%;
+        opacity: 0;
+    }
+    to {
+        transform: translateZ(0);
+        scale: 100%;
+        opacity: 1;
+    }
+}
+
 /* Title */
 .title {
+    animation: slideInTitle 1.5s ease forwards;
     font-size: 3rem;
     margin-bottom: 30px;
+    /* font-size: 102px; */
+    background: -webkit-linear-gradient(rgba(70,92,252,1), rgba(63,251,97,1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* color: rgb(63,94,251);
+    color: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); */
 }
 
 /* Upload Container */
@@ -71,14 +95,30 @@ body {
 /* Submit Button */
 .submit-button {
     padding: 15px 30px;
-    background-color: #28a745;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    transition: 0.4s ease;
+}
+
+.upload-button {
+    padding: 15px 30px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    transition: 0.4s ease;
 }
 
 .submit-button:hover {
-    background-color: #218838;
+    transform: scale(1.05);
+    transition: 0.4s ease;
+}
+
+.upload-button:hover {
+    transform: scale(1.05);
+    transition: 0.4s ease;
 }
