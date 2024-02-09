@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
-import { ethers } from 'ethers';
- // Import useHistory hook
+import React from 'react';
 
 interface ConnectWalletProps {
     setDetails: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const ConnectWallet: React.FC<ConnectWalletProps> = ({ setDetails }) => {
-    
+    const ethereum = (window as any).ethereum;
+
     const requestAccount = async () => {
         console.log('Requesting account..');
 
         // Check if Metamask exists
-        if (window.ethereum) {
+        if (ethereum) {
             console.log('Metamask detected');
 
             try {
-                const accounts = await window.ethereum.request({
+                const accounts = await ethereum.request({
                     method: 'eth_requestAccounts'
                 });
 
