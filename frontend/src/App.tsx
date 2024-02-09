@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'; // Remove useNavigate import
-import ParticleBg from "./components/ParticleBg";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Remove useNavigate import
+ 
 import "./App.css";
-import ConnectWallet from "./components/ConnectWallet";
+ 
 import Home from "./pages/Home";
 import Upload from './components/Upload';
 
