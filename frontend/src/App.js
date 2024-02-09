@@ -1,12 +1,10 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Remove useNavigate import
- 
-import "./App.css";
- 
-import Home from "./pages/Home";
-import Upload from './components/Upload';
 
-const App: React.FC = () => {
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Remove useNavigate import
+import Particles from "./components/Particles";
+import Home from "./pages/Home";
+import "./App.css";
+
+const App = () => {
   
 
   return (
@@ -14,10 +12,12 @@ const App: React.FC = () => {
      
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path='/home' element={<Upload/>} />
+        <Route path='/home' element={<Particles/>} />
       </Routes>
     </BrowserRouter>
   );
 };
 
 export default App;
+
+

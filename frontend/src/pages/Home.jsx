@@ -4,8 +4,8 @@ import ConnectWallet from '../components/ConnectWallet';
 import ParticleBg from '../components/ParticleBg';
 import { useNavigate } from 'react-router-dom';
 
-const Home: React.FC = () => {
-    const [walletAddress, setWalletAddress] = useState<string>("");
+const Home = () => {
+    const [walletAddress, setWalletAddress] = useState("");
     const navigate = useNavigate();
 
     // Use setWalletAddress directly instead of defining setAccount

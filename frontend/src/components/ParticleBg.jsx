@@ -2,12 +2,12 @@ import React, { useCallback } from 'react';
 import Particles from 'react-tsparticles';
 import { loadSlim } from 'tsparticles-slim';
 
-const ParticleBg: React.FC = () => {
-    const particlesInit = useCallback(async (engine: any) => {
+const ParticleBg = () => {
+    const particlesInit = useCallback(async (engine) => {
         await loadSlim(engine);
     }, []);
 
-    const particlesLoaded = useCallback(async (container: any) => {
+    const particlesLoaded = useCallback(async (container) => {
         console.log(container);
     }, []);
 

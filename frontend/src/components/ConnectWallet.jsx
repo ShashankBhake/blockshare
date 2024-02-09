@@ -1,12 +1,8 @@
 // ConnectWallet.tsx
 import React from 'react';
 
-interface ConnectWalletProps {
-    setDetails: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const ConnectWallet: React.FC<ConnectWalletProps> = ({ setDetails }) => {
-    const ethereum = (window as any).ethereum;
+const ConnectWallet = ({ setDetails }) => {
+    const ethereum = (window).ethereum;
 
     const requestAccount = async () => {
         console.log('Requesting account..');
