@@ -16,7 +16,7 @@ const Home: React.FC = () => {
         if (walletAddress) {
             navigate('/home');
         }
-    })
+    }, [walletAddress])
 
     return (
         <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
