@@ -1,15 +1,19 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Particles from "./components/Particles";
+// import Particles from "./components/Particles";
+import Particles from 'react-tsparticles';
 import Home from "./pages/Home";
+import Upload from "./components/Upload";
 import { useState } from "react";
 import React from 'react'
+import { loadFull } from 'tsparticles';
+import filesAmongus from './components/filesAmongus.json';
 
 // Create context for account and contract
 export const AccountContext = React.createContext({
   account: null,
-  setAccount: () => {},
+  setAccount: () => { },
   contract: null,
-  setContract: () => {}
+  setContract: () => { }
 });
 
 const App = () => {
@@ -24,12 +28,17 @@ const App = () => {
     setContract
   };
 
+  const particlesInit = async (main) => {
+    await loadFull(main);
+  };
+
   return (
     <BrowserRouter>
       <AccountContext.Provider value={contextValue}>
+      <Particles id="tsparticles" init={particlesInit} options={filesAmongus} className="particles" />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path='/home' element={<Particles/>} />
+          <Route path='/home' element={<Upload />} />
         </Routes>
       </AccountContext.Provider>
     </BrowserRouter>

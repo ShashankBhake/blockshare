@@ -50,8 +50,8 @@ const App = () => {
                     url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
                     data: formData,
                     headers: {
-                        pinata_api_key: "e1b37404295f87d4a310",
-                        pinata_secret_api_key: 'ce465007a3037e1f8002d1de43606a7468cfabdb933893ecffa03bf8b07aba8f',
+                        pinata_api_key: "840c20aeb6cafe35e4f7",
+                        pinata_secret_api_key: '481847d4e482c7ba0734d3da6152b28cfc3892bffe9abd9199fe9d562d6e6768',
                         'Content-Type': 'multipart/form-data',
                     },
                 });
@@ -69,7 +69,7 @@ const App = () => {
     console.log(`account: ${account}`)
     return (
         <div className="App">
-            <Particles id="tsparticles" init={particlesInit} options={filesAmongus} className="particles" />
+            {/* <Particles id="tsparticles" init={particlesInit} options={filesAmongus} className="particles" /> */}
             <div className="content">
                 <h1 className="title">BlockShare</h1>
                 <div className="upload-container">
