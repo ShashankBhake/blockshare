@@ -1,31 +1,34 @@
-// ConnectWallet.tsx
-import React from 'react';
-
-const ConnectWallet = ({ setDetails }) => {
-    const ethereum = (window).ethereum;
-
+import React, { useState, useContext } from 'react';
+import { ethers } from 'ethers';
+import Upload from '../artifacts/contracts/Upload.sol/Upload.json';
+import { AccountContext } from '../App';
+const ConnectWallet = ({setDetails}) => {
+    // const [account, setAccount] = useState('');
+    // const [contract, setContract] = useState(null);
+    const [provider, setProvider] = useState(null);
+    const {  setAccount, setContract } = useContext(AccountContext);
     const requestAccount = async () => {
-        console.log('Requesting account..');
+        try {
+            if (window.ethereum) {
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                window.ethereum.on('chainChanged', () => window.location.reload());
+                window.ethereum.on('accountsChanged', () => window.location.reload());
 
-        // Check if Metamask exists
-        if (ethereum) {
-            console.log('Metamask detected');
+                await provider.send('eth_requestAccounts', []);
+                const signer = provider.getSigner();
+                const address = await signer.getAddress();
+                setAccount(address);
 
-            try {
-                const accounts = await ethereum.request({
-                    method: 'eth_requestAccounts'
-                });
-
-                console.log(accounts);
-                setDetails(accounts[0]);
-
-                // Redirect to another route after successful login
-                // Replace '/dashboard' with your desired route
-            } catch (err) {
-                console.log(err);
+                const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
+                const contract = new ethers.Contract(contractAddress, Upload.abi, signer);
+                setContract(contract);
+                setProvider(provider);
+                setDetails(address)
+            } else {
+                throw new Error('Metamask is not installed');
             }
-        } else {
-            console.log('Metamask not detected');
+        } catch (error) {
+            console.error('Error connecting wallet:', error);
         }
     };
 

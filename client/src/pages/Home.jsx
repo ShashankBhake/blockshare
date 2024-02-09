@@ -1,4 +1,3 @@
-// Home.tsx
 import React, { useEffect, useState } from 'react';
 import ConnectWallet from '../components/ConnectWallet';
 import ParticleBg from '../components/ParticleBg';
@@ -8,16 +7,13 @@ const Home = () => {
     const [walletAddress, setWalletAddress] = useState("");
     const navigate = useNavigate();
 
-    // Use setWalletAddress directly instead of defining setAccount
-    // It already matches the expected type React.Dispatch<React.SetStateAction<string>>
     const setAccount = setWalletAddress;
-    console.log(walletAddress)
+
     useEffect(() => {
         if (walletAddress) {
             navigate('/home');
-            
         }
-    }, [walletAddress])
+    }, [walletAddress]);
 
     return (
         <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
@@ -25,7 +21,7 @@ const Home = () => {
             <div style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
                 <div>
                     <h1 style={{ color: 'white', fontSize: '5rem' }} >BlockShare</h1>
-                    <ConnectWallet setDetails={setAccount} />
+                    <ConnectWallet setDetails={setAccount}  />
                 </div>
                 <p>Wallet Address: {walletAddress}</p>
             </div>
