@@ -1,20 +1,29 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 import filesAmongus from './filesAmongus.json';
 import { AccountContext } from '../App';
 import axios from 'axios';
 import '../App.css'
+import { useNavigate } from 'react-router-dom';
+import Display from './Display';
 
 const App = () => {
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState('');
+    const navigate = useNavigate();
 
     const { account, setAccount, contract, setContract } = useContext(AccountContext);
 
     const particlesInit = async (main) => {
         await loadFull(main);
     };
+
+    useEffect(() => {
+        if (!account) {
+            navigate('/')
+        }
+    }, [account])
 
     const selectFile = (e) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -28,7 +37,7 @@ const App = () => {
         }
         e.preventDefault();
     };
-    
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -41,14 +50,14 @@ const App = () => {
                     url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
                     data: formData,
                     headers: {
-                        pinata_api_key: "684f86043b34ba634754",
-                        pinata_secret_api_key: '8600d8b5ae0b07f6ee2d500181536d980ffeeb322c20088e2363d7fe05335cd0',
+                        pinata_api_key: "e1b37404295f87d4a310",
+                        pinata_secret_api_key: 'ce465007a3037e1f8002d1de43606a7468cfabdb933893ecffa03bf8b07aba8f',
                         'Content-Type': 'multipart/form-data',
                     },
                 });
                 console.log(response)
                 const ImgHash = `https://gateway.pinata.cloud/ipfs/${response.data.IpfsHash}`;
-                contract.add(account, ImgHash);
+                await contract.add(account, ImgHash);
                 alert('Successfully uploaded image');
                 setFileName('No image selected');
                 setFile(null);
@@ -57,7 +66,7 @@ const App = () => {
             }
         }
     };
-
+    console.log(`account: ${account}`)
     return (
         <div className="App">
             <Particles id="tsparticles" init={particlesInit} options={filesAmongus} className="particles" />
@@ -67,13 +76,14 @@ const App = () => {
                     <label htmlFor="file-upload" className="upload-button"  >
                         Choose Image
                     </label>
-                    <input disabled={!account} type="file" id="file-upload" name="data" className="file-input" onChange={selectFile}/>
+                    <input disabled={!account} type="file" id="file-upload" name="data" className="file-input" onChange={selectFile} />
                     <span className="file-name">{!file ? 'No file selected' : fileName}</span>
                     <button type="submit" className="submit-button" disabled={!file || !account} onClick={handleSubmit}>
-    Upload File
-</button>
+                        Upload File
+                    </button>
                 </div>
             </div>
+            <Display contract={contract} account={account}></Display>
         </div>
     );
 };

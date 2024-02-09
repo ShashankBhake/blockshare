@@ -11,7 +11,7 @@ const Home = () => {
     // Use setWalletAddress directly instead of defining setAccount
     // It already matches the expected type React.Dispatch<React.SetStateAction<string>>
     const setAccount = setWalletAddress;
-    console.log(walletAddress)
+    // console.log(walletAddress)
     useEffect(() => {
         if (walletAddress) {
             navigate('/home');
