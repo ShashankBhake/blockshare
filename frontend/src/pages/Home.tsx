@@ -1,18 +1,17 @@
-import React, { useState } from 'react'
-import ConnectWallet from '../components/ConnectWallet'
-import ParticleBg from '../components/ParticleBg'
-import {useNavigate} from 'react-router-dom'
+// Home.tsx
+import React, { useState } from 'react';
+import ConnectWallet from '../components/ConnectWallet';
+import ParticleBg from '../components/ParticleBg';
+//import { useNavigate } from 'react-router-dom';
+
 const Home: React.FC = () => {
     const [walletAddress, setWalletAddress] = useState<string>("");
-    const navigate = useNavigate()
+    //const navigate = useNavigate();
 
-    const setAccount = (add: string) => {
-        setWalletAddress(add);
-        console.log(walletAddress);
-        // You can navigate here if needed
-        // For now, the navigation logic is commented out
-        navigate('/home')
-    };
+    // Use setWalletAddress directly instead of defining setAccount
+    // It already matches the expected type React.Dispatch<React.SetStateAction<string>>
+    const setAccount = setWalletAddress;
+
     return (
         <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
             <ParticleBg />
@@ -24,7 +23,7 @@ const Home: React.FC = () => {
                 <p>Wallet Address: {walletAddress}</p>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;
