@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./Display.css";
 import axios from "axios";
 // const sdk = require("api")("@pinata-cloud");
+import ReactPlayer from "react-player";
 
 const response = await axios.get(
     "https://api.pinata.cloud/data/pinList?includeCount=false&pageLimit=1000",
@@ -100,7 +101,11 @@ function classifyFile(fileType) {
 
 const Display = ({ contract, account }) => {
     const [data, setData] = useState("");
+    const [videos, setVideos] = useState("");
     const getdata = async () => {
+        console.log("waiting..");
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+        console.log("done waiting");
         let dataArray;
         const Otheraddress = document.querySelector(".address").value;
         try {
@@ -113,9 +118,9 @@ const Display = ({ contract, account }) => {
         } catch (e) {
             console.error(e);
             alert("You don't have access");
-            return
+            return;
         }
-        console.log(dataArray);
+        // console.log(dataArray);
         const isEmpty = Object.keys(dataArray).length === 0;
 
         if (!isEmpty) {
@@ -128,7 +133,7 @@ const Display = ({ contract, account }) => {
             // dataArray.push();
             const str = dataArray.toString();
             const str_array = str.split(",");
-            const obj = {};
+            const obj = [];
             str_array.forEach((url, index) => {
                 const id = index;
                 const cid = url.split("/").pop();
@@ -146,32 +151,56 @@ const Display = ({ contract, account }) => {
                 if (!obj[id]) {
                     obj[id] = {};
                 }
-
-                obj[id]["url"] = "https://gateway.pinata.cloud/ipfs/" + url;
-                obj[id]["cid"] = cid;
-                obj[id]["name"] = name;
-                obj[id]["type"] = classifyFile(ext);
-                // obj[id]["type"] = ext;
+                let bro = {
+                    url: "https://gateway.pinata.cloud/ipfs/" + url,
+                    cid: cid,
+                    name: name,
+                    type: classifyFile(ext),
+                };
+                obj.push(bro);
+                // obj[id]["url"] = "https://gateway.pinata.cloud/ipfs/" + url;
+                // obj[id]["cid"] = cid;
+                // obj[id]["name"] = name;
+                // obj[id]["type"] = classifyFile(ext);
+                // // obj[id]["type"] = ext;
             });
             console.log("obj: ", obj);
 
             // console.log("str: ", str);
             // console.log("str_array ", str_array);
-            const images = str_array.map((item, i) => {
+            const image_files = obj.filter((item) => item.type === "image");
+            console.log(image_files);
+
+            const images = image_files.map((item, i) => {
                 return (
                     <a href={item} key={i} target="_blank">
                         <img
                             key={i}
-                            src={item}
+                            src={item.url}
                             alt="new"
                             className="image-list"
                         ></img>
                     </a>
                 );
             });
+
+            const videos = obj
+                .filter((item) => item.type === "video")
+                .map((item, i) => {
+                    return (
+                        <ReactPlayer
+                            url={item.url}
+                            // width="100%"
+                            // height="100%"
+                            controls={true}
+                            className="video-list"
+                        />
+                    );
+                });
             setData(images);
+            setVideos(videos);
         } else {
-            alert("No image to display");
+            alert("No file to display");
         }
     };
 
@@ -181,10 +210,17 @@ const Display = ({ contract, account }) => {
     return (
         <>
             <div className="container">
+                {data && <p style={{ color: "white" }}> Photos </p>}
                 <div className="list">
                     {/* Render your image data here */}
                     {data}
                 </div>
+                {videos && <p style={{ color: "white" }}> Videos </p>}
+                <div className="list">
+                    {/* Render your image data here */}
+                    {videos}
+                </div>
+
                 <input
                     type="text"
                     placeholder="Enter Address"
