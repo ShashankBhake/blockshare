@@ -1,11 +1,47 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Modal.css";
+
 const Modal = ({ setModalOpen, contract }) => {
+  const [isChecked, setIsChecked] = useState(false);
+  const [selectedFormats, setSelectedFormats] = useState([]);
+
+  const handleCheckboxChange = (format) => {
+    const index = selectedFormats.indexOf(format);
+    if (index === -1) {
+      setSelectedFormats([...selectedFormats, format]);
+      
+    } else {
+      const updatedFormats = [...selectedFormats];
+      updatedFormats.splice(index, 1);
+      setSelectedFormats(updatedFormats);
+    }
+  };
+
+  const imageExtensions = [
+    "png",
+    "jpg",
+    "jpeg",
+    "gif",
+    "bmp",
+    "webp",
+    "svg",
+    "tiff",
+    "png",
+    "jpg",
+    "jpeg",
+    "gif",
+    "bmp",
+    "webp",
+    "svg",
+    "tiff",
+  ];
+
   const sharing = async () => {
     const address = document.querySelector(".address").value;
     await contract.allow(address);
     setModalOpen(false);
   };
+
   useEffect(() => {
     const accessList = async () => {
       const addressList = await contract.shareAccess();
@@ -22,6 +58,7 @@ const Modal = ({ setModalOpen, contract }) => {
     };
     contract && accessList();
   }, [contract]);
+
   return (
     <>
       <div className="modalBackground">
@@ -38,6 +75,20 @@ const Modal = ({ setModalOpen, contract }) => {
             <select id="selectNumber">
               <option className="address">People With Access</option>
             </select>
+            <div className="checkbox-container">
+              {imageExtensions.map((format) => (
+                <label key={format} className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    checked={selectedFormats.includes(format)}
+                    onChange={() => handleCheckboxChange(format)}
+                    className="checkbox-input"
+                  />
+                  <span className="checkbox-custom"></span>
+                  {format.toUpperCase()} {/* Display format in uppercase */}
+                </label>
+              ))}
+            </div>
           </form>
           <div className="footer">
             <button
@@ -55,4 +106,5 @@ const Modal = ({ setModalOpen, contract }) => {
     </>
   );
 };
+
 export default Modal;
