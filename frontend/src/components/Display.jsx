@@ -113,6 +113,7 @@ const Display = ({ contract, account }) => {
         } catch (e) {
             console.error(e);
             alert("You don't have access");
+            return
         }
         console.log(dataArray);
         const isEmpty = Object.keys(dataArray).length === 0;
@@ -145,16 +146,6 @@ const Display = ({ contract, account }) => {
                 if (!obj[id]) {
                     obj[id] = {};
                 }
-                // if (!obj[id]["url"]) {
-                //     obj[id]["url"] = [];
-                // }
-
-                // if (!obj[id]["cid"]) {
-                //     obj[id]["cid"] = [];
-                // }
-                // if (!obj[id]["cid"]) {
-                //     obj[id]["cid"] = [];
-                // }
 
                 obj[id]["url"] = "https://gateway.pinata.cloud/ipfs/" + url;
                 obj[id]["cid"] = cid;
