@@ -10,11 +10,12 @@
 }
 
 .modalContainer {
-  width: 500px;
-  height: 200px;
+  width: 550px;
+  height: 250px;
   border-radius: 12px;
   background-color: lightskyblue;
-  background-color: rgba(128, 128, 128, 0.8);
+  background-color: rgba(35, 35, 70, 0.5);
+  
   /* background-color: transparent; */
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
@@ -25,16 +26,19 @@
 .modalContainer {
   display: inline-block;
   text-align: center;
+  
 }
 .title-share{
   display: inline-block;
   text-align: center;
-  color : #2A2B2E; 
+  color : lightgray; 
+ 
 }
 
 .titleCloseBtn {
   display: flex;
   justify-content: flex-end;
+  
 }
 
 .titleCloseBtn button {
@@ -42,6 +46,7 @@
   border: none;
   font-size: 1px;
   cursor: pointer;
+  
 }
 
 .modalContainer .body {
@@ -51,6 +56,7 @@
   align-items: center;
   font-size: 1.7rem;
   text-align: center;
+ 
 }
 
 .modalContainer .footer {
@@ -58,6 +64,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .modalContainer .footer button {
@@ -66,21 +73,27 @@
   margin: 35px;
   border: none;
   background-color: cornflowerblue;
-  color: white;
+  color : lightgray; 
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+  
 }
 
 #cancelBtn {
-  background-color: crimson;
+   /* background-color: crimson; */
+  /* background-color: #E30B5C; */
+   background-color: rgba(255, 0, 0, 0.5);  
+
+  
 }
 .address {
   display: block;
   margin:25px;
   height: 50px;
-  width: 330px;
+  width: 300px;
   text-align: center;
+ 
 }
 
 input[type="text"]:focus {
@@ -89,5 +102,21 @@ input[type="text"]:focus {
 
 #selectNumber option.address {
   background-color: lightgrey;
+  justify-content: center;
+  align-items: center;
+  /* transform: scale(1.2); */
+}
+select {
+  /* transform: scale(70%);  */
+  /* background-color: lightskyblue;  */
+  
   height:20px;
+  width:350px;
+  /* align-items: center;
+  justify-content: center; */
+}
+select#selectNumber {
+  width: 100%; /* Adjust the width as needed */
+  margin-top: 10px; /* Add margin for spacing */
+  text-align: center; /* Align text horizontally */
 }
