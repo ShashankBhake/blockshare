@@ -13,8 +13,8 @@
 }
 
 .hometitle{
-  background: -webkit-linear-gradient(rgb(181, 64, 64), rgb(75, 255, 39));
-  -webkit-background-clip: text;
+  background: -webkit-linear-gradient( #83a4d4,#b6fbff);
+    -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   /* color: -webkit-linear-gradient( rgba(63,94,251,1), rgba(252,70,107,1)); */
 }
