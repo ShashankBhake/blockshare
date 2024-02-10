@@ -5,7 +5,18 @@ body {
 }
 
 .share{
-    color: white;
+    /* color: ; */
+    transition: background-color 0.3s ease;
+    transition: 0.4s ease;
+ border-radius: 5px;
+  color:black;
+  margin: 25px;
+  height: 40px;
+  width: 100px;
+/* position:fixed; */
+position: relative;
+cursor: pointer;
+
 }
 /* Container */
 .App {
