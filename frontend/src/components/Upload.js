@@ -1,22 +1,22 @@
-import React, { useState, useContext, useEffect } from 'react';
-import Particles from 'react-tsparticles';
-import { loadFull } from 'tsparticles';
-import filesAmongus from './filesAmongus.json';
-import { AccountContext } from '../App';
-import axios from 'axios';
-import '../App.css'
-import { useNavigate } from 'react-router-dom';
-import Display from './Display';
+import React, { useState, useContext, useEffect } from "react";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
+import filesAmongus from "./filesAmongus.json";
+import { AccountContext } from "../App";
+import axios from "axios";
+import "../App.css";
+import { useNavigate } from "react-router-dom";
+import Display from "./Display";
 import Modal from "./Modal";
 
 const App = () => {
     const [file, setFile] = useState(null);
-    const [fileName, setFileName] = useState('');
+    const [fileName, setFileName] = useState("");
     const navigate = useNavigate();
     const [modalOpen, setModalOpen] = useState(false);
 
-
-    const { account, setAccount, contract, setContract } = useContext(AccountContext);
+    const { account, setAccount, contract, setContract } =
+        useContext(AccountContext);
 
     const particlesInit = async (main) => {
         await loadFull(main);
@@ -24,9 +24,9 @@ const App = () => {
 
     useEffect(() => {
         if (!account) {
-            navigate('/')
+            navigate("/");
         }
-    }, [account])
+    }, [account]);
 
     const selectFile = (e) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -41,35 +41,35 @@ const App = () => {
         e.preventDefault();
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (file) {
             try {
                 const formData = new FormData();
-                formData.append('file', file);
+                formData.append("file", file);
                 const response = await axios({
-                    method: 'post',
-                    url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
+                    method: "post",
+                    url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
                     data: formData,
                     headers: {
                         pinata_api_key: "840c20aeb6cafe35e4f7",
-                        pinata_secret_api_key: '481847d4e482c7ba0734d3da6152b28cfc3892bffe9abd9199fe9d562d6e6768',
-                        'Content-Type': 'multipart/form-data',
+                        pinata_secret_api_key:
+                            "481847d4e482c7ba0734d3da6152b28cfc3892bffe9abd9199fe9d562d6e6768",
+                        "Content-Type": "multipart/form-data",
                     },
                 });
-                console.log(response)
+                console.log(response);
                 const ImgHash = `https://gateway.pinata.cloud/ipfs/${response.data.IpfsHash}`;
                 await contract.add(account, ImgHash);
-                alert('Successfully uploaded image');
-                setFileName('No image selected');
+                alert("Successfully uploaded file");
+                setFileName("No file selected");
                 setFile(null);
             } catch (error) {
-                alert('Unable to upload file');
+                alert("Unable to upload file");
             }
         }
     };
-    console.log(`account: ${account}`)
+    console.log(`account: ${account}`);
     return (
         <>
             {!modalOpen && (
@@ -84,19 +84,46 @@ const App = () => {
             <div className="App">
                 {/* <Particles id="tsparticles" init={particlesInit} options={filesAmongus} className="particles" /> */}
                 <div className="content">
-                    <h1 className="title" style={{ padding : '40px', fontSize : '4rem', marginBottom :'20px'}}>BlockShare</h1>
+                    <h1
+                        className="title"
+                        style={{
+                            padding: "40px",
+                            fontSize: "4rem",
+                            marginBottom: "20px",
+                        }}
+                    >
+                        BlockShare
+                    </h1>
                     <div className="upload-container">
-                        <span className="file-name">{!file ? 'No file selected' : fileName}</span>
-                        <div style={{ display : 'flex' , gap : '15px'}}>
-                        <label htmlFor="file-upload" className="upload-button"  >
-                            Choose Image
-                        </label>
-                        <input disabled={!account} type="file" id="file-upload" name="data" className="file-input" onChange={selectFile} />
-                        <button style={{
-                            backgroundColor : file ? 'green' : 'grey'
-                        }} type="submit" className="submit-button" disabled={!file || !account} onClick={handleSubmit}>
-                            Upload File
-                        </button>
+                        <span className="file-name">
+                            {!file ? "No file selected" : fileName}
+                        </span>
+                        <div style={{ display: "flex", gap: "15px" }}>
+                            <label
+                                htmlFor="file-upload"
+                                className="upload-button"
+                            >
+                                Choose File
+                            </label>
+                            <input
+                                disabled={!account}
+                                type="file"
+                                id="file-upload"
+                                name="data"
+                                className="file-input"
+                                onChange={selectFile}
+                            />
+                            <button
+                                style={{
+                                    backgroundColor: file ? "green" : "grey",
+                                }}
+                                type="submit"
+                                className="submit-button"
+                                disabled={!file || !account}
+                                onClick={handleSubmit}
+                            >
+                                Upload File
+                            </button>
                         </div>
                     </div>
                 </div>
