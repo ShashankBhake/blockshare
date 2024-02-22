@@ -1,4 +1,4 @@
-# BitNBuilt Hackathon
+# Hackathon
 
 Using 
 
